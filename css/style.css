@@ -26,3 +26,44 @@ body{
 .pword-container h1{
     text-align: center;
 }
+
+.pword-header {
+    padding: 1rem;
+}
+
+.pword {
+    background-color: #051933;
+    display: flex;
+    font-size: 1.8rem;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    position: relative;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.pword button {
+    background-color: white;
+    border: none;
+    color: rgb(29, 2, 56);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 0.25rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(0, 20%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0;
+}
+
+.pword:hover button {
+    opacity: 1;
+    transform: translate(0, 0%);
+}
+
+.pword-body {
+    padding: 0 1rem 1rem;
+}
