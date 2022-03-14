@@ -1,5 +1,8 @@
+const pwordHdr = document.getElementById("header");
 const pwordEl = document.getElementById("pword");
 const copyEl = document.getElementById("copy");
+const msg = document.getElementById("message");
+const str = document.getElementById("strenght");
 const lenEl = document.getElementById("len");
 const upperEl = document.getElementById("upper");
 const lowerEl = document.getElementById("lower");
@@ -81,7 +84,41 @@ function generateX(){
     return xs[Math.floor(Math.random() * xs.length)]
 }
 
-genrEl.addEventListener("click", generatePassword);
+function validatePassword(){
+    const len = lenEl.value;
+
+    if(!upperEl.checked && !lowerEl.checked && !numberEl.checked && !symbolEl.checked){
+        msg.style.display = "none";
+        pwordHdr.style.border = "none";
+        pwordEl.innerText = "";
+        return;
+    }
+    
+    if(len >= 4 && len <= 6) {
+        str.innerHTML = "Fraca";
+        msg.style.color = "#ff5925";
+        pwordHdr.style.border = "1px solid #ff5925";
+    }
+    else if(len > 6 && len < 9){
+        str.innerHTML = "Média";
+        msg.style.color = "yellow";
+        pwordHdr.style.border = "1px solid yellow";
+    }
+    else if(len >= 9 ){
+        str.innerHTML = "Forte";
+        msg.style.color = "#26d730";
+        pwordHdr.style.border = "1px solid #26d730";
+    }
+
+}
+
+genrEl.addEventListener("click", function(){
+
+    msg.style.display = "block";
+    
+    generatePassword();
+    validatePassword();
+});
 
 copyEl.addEventListener("click", () => {
     const textarea = document.createElement("textarea");
@@ -97,4 +134,4 @@ copyEl.addEventListener("click", () => {
     document.execCommand("copy");
     textarea.remove();
     alert("Senha Copiada");
-})
+});

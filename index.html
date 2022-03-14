@@ -15,16 +15,17 @@
     <h1>Gerador de Senhas</h1>
 
     <div class="pword-header">
-        <div class="pword">
+        <div class="pword" id="header">
             <span id="pword">awgA23@v42!#</span>
             <button id="copy">Copiar</button>
         </div>
+        <p id="message">Nível da Senha: <span id="strenght"></span></p>
     </div>
 
     <div class="pword-body">
         <div class="form-control">
             <label for="len">Comprimento da Senha</label>
-            <input type="number" id="len" value="15" min="5" max="30" oninput="validity.valid||(value='');">
+            <input type="number" id="len" value="15" min="4" max="30" oninput="validity.valid||(value='');">
         </div>
 
         <div class="form-control">

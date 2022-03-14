@@ -64,9 +64,19 @@ body{
     transform: translate(0, 0%);
 }
 
+#message {
+    position: absolute;
+    display: none;
+}
+
 .pword-body {
+    margin-top: 50px;
     padding: 0 1rem 1rem;
 }
+
+div.pword-body > .form-control:nth-child(1) input {
+    width: 50px; 
+} 
 
 .form-control {
     color: #eee;
@@ -91,7 +101,24 @@ body{
     transition: .2s;
 }
 
-.genr:hover{
+.genr:hover {
     transition: .2s;
     background-color: #167bf7b6;
+}
+
+.genr:active {
+    transition: .1s;
+    background-color: #167bf7;
+}
+
+@media screen and (max-width: 480px) {
+    .pword-container{
+        min-width: 350px; 
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .pword-container{
+            min-width: 400px; 
+        }
 }
