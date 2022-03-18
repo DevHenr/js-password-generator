@@ -13,7 +13,7 @@ const genrEl = document.getElementById("genr");
 const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
 const numbers = "0123456789";
-const symbols = "\|!@#$%¨&*()-_=+[]}{/?;:.><,'";
+const symbols = "-_^~><=@$!%*#?&";
 
 function getUppercase(){
     return upperLetters[Math.floor(Math.random() * upperLetters.length)];
@@ -86,35 +86,84 @@ function generateX(){
 
 function validatePassword(){
     const len = lenEl.value;
+    const password = pwordEl.innerText;
+
+    var matchedCase = new Array();
+    matchedCase.push("[-_^~><=@$!%*#?&]"); 
+    matchedCase.push("[A-Z]");      
+    matchedCase.push("[0-9]");     
+    matchedCase.push("[a-z]");    
+
+    var ctr = 0;
+    for (var i = 0; i < matchedCase.length; i++) {
+        if (new RegExp(matchedCase[i]).test(password)) {
+            ctr++;
+        }
+    }
 
     if(!upperEl.checked && !lowerEl.checked && !numberEl.checked && !symbolEl.checked){
-        msg.style.display = "none";
-        pwordHdr.style.border = "none";
-        pwordEl.innerText = "";
-        return;
-    }
-    
-    if(len >= 4 && len <= 6) {
-        str.innerHTML = "Fraca";
-        msg.style.color = "#ff5925";
-        pwordHdr.style.border = "1px solid #ff5925";
-    }
-    else if(len > 6 && len < 9){
-        str.innerHTML = "Média";
-        msg.style.color = "yellow";
-        pwordHdr.style.border = "1px solid yellow";
-    }
-    else if(len >= 9 ){
-        str.innerHTML = "Forte";
-        msg.style.color = "#26d730";
-        pwordHdr.style.border = "1px solid #26d730";
+        ctr-=2;
     }
 
+    if(len >= 8){
+        ctr+=2;
+    }
+
+    var strenght = "";
+    var color = "";
+    var border = "";
+    var display = "";
+    switch (ctr) {
+        case 0:
+            strenght = "";
+            color = "";
+            border = "none";
+            display = "none";
+        break;
+        case 1:
+            strenght = "Péssima";
+            color = "red";
+            border = "1px solid red";
+            display = "block";
+        break;
+        case 2:
+            strenght = "Muito fraca";
+            color = "#ff5925";
+            border = "1px solid #ff5925";
+            display = "block";
+        break;
+        case 3:
+            strenght = "Fraca";
+            color = "orange";
+            border = "1px solid orange";
+            display = "block";
+        break;
+        case 4:
+            strenght = "Média";
+            color = "yellow";
+            border = "1px solid yellow";
+            display = "block";
+        break;
+        case 5:
+            strenght = "Forte";
+            color = "#26d730";
+            border = "1px solid #26d730";
+            display = "block";
+        break;
+        case 6:
+            strenght = "Excelente";
+            color = "#16f7ac";
+            border = "1px solid #16f7ac";
+            display = "block";
+        break;
+    }
+    str.innerHTML = strenght;
+    msg.style.color = color;
+    pwordHdr.style.border = border;
+    msg.style.display = display;
 }
 
 genrEl.addEventListener("click", function(){
-
-    msg.style.display = "block";
     
     generatePassword();
     validatePassword();
